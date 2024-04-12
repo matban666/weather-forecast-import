@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'weather_shared_model.weather_shared_model.database_model',
+    'weather_shared_model.database_model',
     'testapp'
 ]
 

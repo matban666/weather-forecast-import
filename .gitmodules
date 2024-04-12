@@ -1,0 +1,3 @@
+[submodule "weather_shared_model"]
+	path = weather_shared_model
+	url = https://github.com/matban666/weather-shared-model.git

@@ -2,7 +2,7 @@ import os
 import json
 import logging
 from django.core.management.base import BaseCommand
-from weather_shared_model.database_model.models import WeatherForecast, WeatherTimeSeries
+from weather_shared_model.weather_forecast.models import ModelRunDate, Details
 
 logger = logging.getLogger(__name__) 
 logger.setLevel(logging.DEBUG)
@@ -14,11 +14,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         logger.debug("Extracting data from JSON file") 
-        logger.info("Creating WeatherForecast object")
+        logger.info("Creating ModelRunDate object")
 
         base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
         
-        fixture_dir = os.path.join(base_dir, 'weather_shared_model', 'database_model', 'fixtures')
+        fixture_dir = os.path.join(base_dir, 'weather_shared_model', 'weather_forecast', 'fixtures')
         for filename in os.listdir(fixture_dir):
             if filename.startswith('forecast_'):
                 data_file = os.path.join(fixture_dir, filename)
@@ -32,16 +32,16 @@ class Command(BaseCommand):
 
                     logger.debug("feature")
 
-                    # Create WeatherForecast object 
-                    forecast_object = WeatherForecast(
+                    # Create ModelRunDate object 
+                    model_run_date_object = ModelRunDate(
                         model_run_date=properties['modelRunDate']
                     )
-                    forecast_object.save()
+                    model_run_date_object.save()
 
-                    # Create WeatherTimeSeries objects for each item
+                    # Create Details objects for each item
                     for timeseries_data in properties['timeSeries']:
-                        time_series_object = WeatherTimeSeries(
-                            forecast=forecast_object,
+                        details_object = Details(
+                            model_run_date=model_run_date_object,
                             time=timeseries_data['time'],
                             screen_temperature=timeseries_data['screenTemperature'],
                             max_screen_air_temp=timeseries_data['maxScreenAirTemp'] if 'maxScreenAirTemp' in timeseries_data else None,
@@ -63,6 +63,6 @@ class Command(BaseCommand):
                             prob_of_precipitation=timeseries_data['probOfPrecipitation']
 
                         )
-                        time_series_object.save()
+                        details_object.save()
 
 

@@ -161,3 +161,6 @@ cython_debug/
 
 /.vscode
 .env_windows_python
+.env.example_postgres
+.env.example_sqlite
+.env.windows_python

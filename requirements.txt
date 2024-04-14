@@ -6,3 +6,4 @@ tzdata==2024.1
 graphene==3.3
 urllib3==2.2.1
 psycopg2-binary==2.9.9
+python-decouple-3.8

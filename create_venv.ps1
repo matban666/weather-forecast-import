@@ -6,7 +6,7 @@
 # PYTHON_EXE=C:/Users/<YOU>/AppData/Local/Programs/Python/Python311/python.exe
 
 # Load environment variables from .env_windows_python file  
-$env_vars = Get-Content -Path '.env_windows_python' | ConvertFrom-StringData
+$env_vars = Get-Content -Path '.env.windows_python' | ConvertFrom-StringData
 
 #Get the Python executable path from the loaded variables
 $PYTHON_EXE = $env_vars['PYTHON_EXE']
